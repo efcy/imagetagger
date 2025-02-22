@@ -67,27 +67,49 @@ ImageTagger can be installed and run locally (best for development), in a docker
 
 ### Locally
 
-
+In some of the following code snippets, the `DJANGO_CONFIGURATION` environment variable is exported.
+This defines the type of deployment by selecting one of our predefined configuration presets.
+If ImageTagger is running in a development environment, no export is necessary.
 
 1.  #### Install the latest release
     
     You need to have [Pipenv](https://github.com/pypa/pipenv) installed on your system.
     
+    Replace `v…` with the latest release tag.
     ```shell
+    git checkout v…
     cd imagetagger
-    python3 -m venv venv 
-    source venv/bin/activate
-    python -m pipenv sync
+    pipenv sync
     ```
-    #### Make errors go away
-    
-    create data folder in src: `cd src && mkdir data`
-
-
+   
 2.  #### Setup a database server
     
-    just run ./create_db.sh
+    As a database server [postgresql](https://www.postgresql.org/) is required.
+    Please seek a guide specific to your operating system on how to install a server and get it running.
+   
+    Once postgresql is installed, a user and database need to be set up for ImageTagger.
+    Of course, the user and password can be changed to something else.
+    ```postgresql
+    CREATE USER imagetagger PASSWORD 'imagetagger';
+    CREATE DATABASE imagetagger WITH OWNER imagetagger;
+    ```
+    
+3.  ### Select a Configuration preset
 
+    When running ImageTagger as a developer, no step is necessary because a development configuration is used per
+    default when not running as a docker based deployment.
+    However if this is supposed to be a production deployment, export the following environment variable.
+    
+    Currently available presets are `Dev` and `Prod`
+
+    ```shell
+    export DJANGO_CONFIGURATION=Prod
+    ```
+
+3.  #### Configuring ImageTagger to connect to the database
+    
+    Please see the lower [Configuration](#configuration) section on how to configure ImageTagger for your specific
+    database credentials.
    
 4.  #### Initialize the database
     

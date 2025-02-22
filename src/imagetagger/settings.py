@@ -161,11 +161,11 @@ class Base(Configuration):
         return {
             'default': {
                 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-                'HOST': self.DB_HOST,
-                'PORT': self.DB_PORT,
-                'NAME': self.DB_NAME,
-                'USER': self.DB_USER,
-                'PASSWORD': self.DB_PASSWORD
+                'NAME': "bitbot",
+                'USER': "test",
+                'PASSWORD': "test",
+                'HOST': "localhost",
+                'PORT': 5432,
             }
         }
 
